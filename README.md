@@ -1,5 +1,5 @@
 # <em>TS-CP<sup>2</sup></em>
-## Time Series Change Point Detection based on Contrastive Predictive Coding
+### Time Series Change Point Detection based on Contrastive Predictive Coding
 
 # Abstract
 Change Point Detection techniques aim to capture changes in trends and sequences in time-series data to describe the underlying behaviour of the system.
