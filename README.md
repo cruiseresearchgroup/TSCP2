@@ -10,4 +10,15 @@ Through extensive evaluations, we demonstrate that our method outperforms multip
 
 ## The script to run the model
 
-python 3 main.py --datapath <path_to_dataset> --output <path_to_output> --win <window_size> --dataset <dataset_name> --batch <batch_size>  --code <code_size> --sim [cosine||] --loss [nce|fc|dcl|harddcl] --lr [0.00005|0.0001] --temp 0.5 [--tau <> --beta <>]
+    python 3 main.py  --datapath <path_to_dataset> 
+                      --output <path_to_output> 
+                      --win <window_size> 
+                      --dataset <dataset_name> 
+                      --batch <batch_size>  
+                      --code <code_size> 
+                      --sim [cosine||] 
+                      --loss [nce|fc|dcl|harddcl] 
+                      --lr [0.00005|0.0001] 
+                      --temp 0.5 
+                      --tau <> 
+                      --beta <>
