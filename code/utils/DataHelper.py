@@ -11,8 +11,8 @@ from sklearn.preprocessing import MinMaxScaler
 
 from utils.hasc_helper import load_hasc_ds
 from utils.usc_ds_helper import load_usc_ds
-from utils.wsdm_ds_helper import load_wsdm_ds
-from utils.yahoo_ds_helper import load_yahoo_ds
+#from utils.wsdm_ds_helper import load_wsdm_ds
+#from utils.yahoo_ds_helper import load_yahoo_ds
 
 
 def ts_samples(mbatch, win):
@@ -43,27 +43,6 @@ def split_sequences(sequences, n_steps_in, n_steps_out, remove_CP):
             else:
                 cp.append(0)
     return array(X), array(y), array(cp)
-
-def load_EYE_dataset(prefix, mode):
-    n_steps = 20
-    batch_size = 256
-    future = 1  # Number of steps to forecast
-    # read input file
-    data = read_csv(os.path.join(prefix,"EYEEEG","EEGEYE_features_raw.csv"), header=0)
-
-    values = np.array(data.values)
-    labels = np.array(values[:, 0])
-    series = values
-
-    # ensure all data is float
-    series = series.astype('float32')
-    # normalize features
-    scaler = MinMaxScaler(feature_range=(0, 1))
-    series[:, 2:] = scaler.fit_transform(series[:, 2:])
-    time = range(1, data.shape[0])
-    split_time = floor(0.8 * data.shape[0])
-
-    return series, split_time, n_steps, future, batch_size, labels
 
 def shuffle(a, b=None, c=None):
     indices = np.arange(a.shape[0])
@@ -190,12 +169,12 @@ def create_pairs(data, batch_size, n_steps_in, n_steps_out):
 def load_dataset(path, ds_name, win, bs, mode="train"):
     if ds_name == 'HASC':
         trainx, trainlbl = load_hasc_ds(path, window = 2 * win, mode=mode)
-    elif ds_name == "YAHOO":
-        trainx, trainlbl = load_yahoo_ds(path, window=2 * win, mode=mode)
+    #elif ds_name == "YAHOO":
+    #    trainx, trainlbl = load_yahoo_ds(path, window=2 * win, mode=mode)
     elif ds_name == "USC":
         trainx, trainlbl = load_usc_ds(path, window=2 * win, mode=mode)
-    elif ds_name == "WISDM":
-        trainx, trainlbl = load_wsdm_ds(path, window=2 * win, mode=mode)
+    #elif ds_name == "WISDM":
+    #    trainx, trainlbl = load_wsdm_ds(path, window=2 * win, mode=mode)
 
     trainlbl = trainlbl.reshape((trainlbl.shape[0], 1))
     print(trainx.shape, trainlbl.shape)

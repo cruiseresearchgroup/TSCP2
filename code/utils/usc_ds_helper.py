@@ -1,3 +1,4 @@
+import os
 from math import floor
 import numpy as np
 import pandas as pd
@@ -40,7 +41,7 @@ def extract_windows(path, window_size, mode="train"):
     #files = os.scandir(path)
     windows = []
     lbl = []
-    dataset = sio.loadmat(path+"usc.mat")
+    dataset = sio.loadmat(os.path.join(path,"usc.mat"))
 
     ts = np.array(dataset['Y'])
     ts = ts[:,0]

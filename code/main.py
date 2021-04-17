@@ -23,7 +23,7 @@ parser.add_argument('--gpu', type=int, default=0, help='gpu device id')
 parser.add_argument('--window', type=int, default=100, help='window size')
 parser.add_argument('--code', type=int, default=10, help='size of encoded features')
 parser.add_argument('--beta', type=float, default=1, help='parameter for FN loss function or threshold for FC loss function')
-parser.add_argument('--epoch', type=int, default=100, help='max iteration for training')
+parser.add_argument('--epoch', type=int, default=1, help='max iteration for training')
 parser.add_argument('--batch', type=int, default=64, help='batch_size for training')
 parser.add_argument('--eval_freq', type=int, default=25, help='evaluation frequency per batch updates')
 parser.add_argument('--temp', type=float, default=.1, help='Temperature parameter for NCE loss function')
@@ -82,13 +82,11 @@ prep_model = cp2.get_TCN_encoder((1, WIN), int(WIN / 2), CODE_SIZE)
 
 if SIM == "cosine":
     similarity = ls._cosine_simililarity_dim2
-# elif sim_fn == "dtw":
-#    similarity = DTW
-elif SIM == "euclidean":
+elif SIM == "euclidean":    # not working yet
     similarity = ls._euclidean_similarity_dim2
-elif SIM == "edit":
+elif SIM == "edit":         # not working yet
     similarity = ls._edit_similarity_dim2
-elif SIM == "nwarp":
+elif SIM == "nwarp":        # not working yet
     similarity = ls._neural_warp_dim2
 
 epoch_wise_loss, epoch_wise_sim, epoch_wise_neg, prep_model = cp2.train_prep(prep_model, train_ds, OUTPUT_PATH, optimizer,
@@ -127,7 +125,6 @@ np.savetxt(os.path.join(OUTPUT_PATH, "pred_sim", train_name + "_pred_sim.csv"), 
                    header="lbl,"+LOSS, comments="")
 print("Saved test similarity result!")
 
-
 print('Average similarity for test set : Reps : {}'.format(np.mean(rep_sim)))
 gt = np.zeros(lbl_test.shape[0])
 gt[np.where((lbl_test > int(2 * WIN * 0.15)) & (lbl_test < int(2 * WIN * 0.85)))[0]] = 1
@@ -139,7 +136,7 @@ with open(os.path.join(OUTPUT_PATH, "Evaluation2.txt"), "a") as out_file:
     out_file.write(str(BATCH_SIZE) + "," + str(WIN) + "," + str(CODE_SIZE) + "," + str(TEMP) + "," + str(
                 LR) + "," + str(np.mean(epoch_wise_loss))+ ","+str(epoch_wise_sim[-1]) + "," +str(epoch_wise_neg[-1])+","+result)
     out_file.close()
-    print("Saved model to disk")
+    print("Saved CP results to disk!")
 # -------------------------
 # 3 SAVE THE MODEL
 # -------------------------
