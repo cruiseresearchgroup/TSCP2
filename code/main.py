@@ -57,7 +57,7 @@ TAU = args.tau
 BETA = args.beta
 EVALFREQ = args.eval_freq
 
-#EPOCHS = EPOCHS * int(BATCH_SIZE / 4)
+EPOCHS = EPOCHS * int(BATCH_SIZE / 4)
 criterion = tf.keras.losses.BinaryCrossentropy(from_logits=True, reduction=tf.keras.losses.Reduction.SUM)
 decay_steps = 1000
 lr_decayed_fn = tf.keras.experimental.CosineDecay(
@@ -134,7 +134,7 @@ gt[np.where((lbl_test > int(2 * WIN * 0.15)) & (lbl_test < int(2 * WIN * 0.85)))
 # threshold_segmentation(h_pred,f_pred, gt, train_name, os.path.join(OUT_PATH,"Evaluation.txt"), threshold = np.mean(rep_sim) - np.std(rep_sim))
 result = estimate_CPs(rep_sim, gt, os.path.join(OUTPUT_PATH, train_name),
                     os.path.join(OUTPUT_PATH, "Evaluation.txt"),
-                    metric=SIM, threshold=epoch_wise_sim[-1] - ((epoch_wise_sim[-1]-epoch_wise_neg[-1])/4))
+                    metric='cosine', threshold=epoch_wise_sim[-1] - ((epoch_wise_sim[-1]-epoch_wise_neg[-1])/3))
 with open(os.path.join(OUTPUT_PATH, "Evaluation2.txt"), "a") as out_file:
     out_file.write(str(BATCH_SIZE) + "," + str(WIN) + "," + str(CODE_SIZE) + "," + str(TEMP) + "," + str(
                 LR) + "," + str(np.mean(epoch_wise_loss))+ ","+str(epoch_wise_sim[-1]) + "," +str(epoch_wise_neg[-1])+","+result)
