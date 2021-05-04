@@ -37,7 +37,7 @@ def load_usc_ds(path, window, mode='train'):
 
 
 def extract_windows(path, window_size, mode="train"):
-    #files = os.scandir(path)
+
     windows = []
     lbl = []
     dataset = sio.loadmat(path+"usc.mat")
@@ -47,21 +47,16 @@ def extract_windows(path, window_size, mode="train"):
     cp = np.array(dataset['L'])
     cp = cp[:,0]
 
-    #cp = pd.read_csv(path+"usc_label.csv")
     num_cp = 0
     #ts = np.sqrt(np.power(x[:, 0], 2) + np.power(x[:, 1], 2) + np.power(x[:, 2], 2))
     for i in range(0, ts.shape[0] - window_size, 5):
         windows.append(np.array(ts[i:i + window_size]))
-        # print("TS",ts[i:i+window_size])
         is_cp = np.where(cp[i:i + window_size] == 1)[0]
         if is_cp.size == 0:
             is_cp = [0]
         else:
             num_cp += 1
         lbl.append(is_cp[0])
-
-        # print(is_cp)
-
 
     print("number of samples : {} /  number of samples with change point : {}".format(len(windows), num_cp))
     windows = np.array(windows)
