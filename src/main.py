@@ -32,15 +32,17 @@ parser.add_argument('--lr', type=float, default=1e-4, help='learning rate')
 
 # sanity check
 args = parser.parse_args()
-if not os.path.exists(args.output):
-    os.mkdir(args.output)
+if not os.path.exists(os.path.join(args.output,args.dataset)):
+    if not os.path.exists(args.output):
+        os.mkdir(args.output)
+    os.mkdir(os.path.join(args.output,args.dataset))
     os.mkdir(os.path.join(args.output,"plots"))
     os.mkdir(os.path.join(args.output, "pred_sim"))
     os.mkdir(os.path.join(args.output, "model"))
 
 
 DATA_PATH = args.datapath
-OUTPUT_PATH = args.output
+OUTPUT_PATH = os.path.join(args.output,args.dataset)
 MODEL_PATH = os.path.join(args.output, "model")
 DS_NAME = args.dataset
 LOSS = args.loss
@@ -96,7 +98,6 @@ epoch_wise_loss, epoch_wise_sim, epoch_wise_neg, prep_model = cp2.train_prep(pre
                                                                              epochs=EPOCHS, sfn=similarity, lfn=LOSS, beta=BETA, tau= TAU)
 
 # SAVE MODEL and Learning Progress plot
-
 #with plt.xkcd():
 splot=1
 if splot ==1:

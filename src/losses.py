@@ -1,6 +1,5 @@
 from tensorflow.keras import backend as K
 import tensorflow as tf
-import losses as ls
 import numpy as np
 
 cosine_sim_1d = tf.keras.losses.CosineSimilarity(axis=1, reduction=tf.keras.losses.Reduction.NONE)

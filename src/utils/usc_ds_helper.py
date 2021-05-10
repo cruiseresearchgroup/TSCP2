@@ -1,8 +1,6 @@
 from math import floor
 import numpy as np
-import pandas as pd
 import scipy.io as sio
-import csv
 
 def ts_samples(mbatch, win):
     x = mbatch[:,1:win+1]
