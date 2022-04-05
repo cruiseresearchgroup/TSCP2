@@ -35,10 +35,14 @@ args = parser.parse_args()
 if not os.path.exists(os.path.join(args.output,args.dataset)):
     if not os.path.exists(args.output):
         os.mkdir(args.output)
+        os.mkdir(os.path.join(args.output, "plots"))
+        os.mkdir(os.path.join(args.output, "pred_sim"))
+        os.mkdir(os.path.join(args.output, "model"))
     os.mkdir(os.path.join(args.output,args.dataset))
-    os.mkdir(os.path.join(args.output,"plots"))
-    os.mkdir(os.path.join(args.output, "pred_sim"))
-    os.mkdir(os.path.join(args.output, "model"))
+    os.mkdir(os.path.join(args.output,args.dataset, "plots"))
+    os.mkdir(os.path.join(args.output,args.dataset, "pred_sim"))
+    os.mkdir(os.path.join(args.output,args.dataset, "model"))
+
 
 
 DATA_PATH = args.datapath
