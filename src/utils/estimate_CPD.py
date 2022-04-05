@@ -1,5 +1,7 @@
 import numpy as np
 from sklearn.metrics import confusion_matrix,f1_score
+from matplotlib import pyplot as plt
+from losses import _cosine_simililarity_dim1
 
 
 def estimate_CPs(sim, gt, name, train_name, metric='cosine', threshold=0.5):
@@ -50,5 +52,4 @@ def estimate_CPs(sim, gt, name, train_name, metric='cosine', threshold=0.5):
 
     print("SEQ : Pos {}, fp {}, fn {}, tp {} ----- f1-score {}".format(pos, seq_fp, seq_fn, seq_tp, seq_f1))
     result = "tn, {}, fp, {}, fn, {}, tp, {}, f1-score, {}, Pos, {}, seqfp, {}, seqfn, {}, seqtp, {}, seqf1, {}\n".format(tn, fp, fn, tp, f1, pos, seq_fp, seq_fn, seq_tp, seq_f1)
-
     return result

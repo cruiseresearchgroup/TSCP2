@@ -2,19 +2,15 @@ import os
 
 from tensorflow.keras.layers import *
 from tensorflow.keras.models import *
-from tensorflow.keras import backend as K
-import matplotlib.pyplot as plt
 from tqdm import tqdm
 import tensorflow as tf
 from tcn import TCN
 import numpy as np
 
 import losses as ls
+from utils.usc_ds_helper import ts_samples
 
 #@tf.function
-from utils.DataHelper import ts_samples
-
-
 def train_step(xis, xjs, amodel, optimizer, criterion, temperature, sfn, lfn, beta, tau):
     # print("---------",xis.shape)
     with tf.GradientTape() as tape:

@@ -69,4 +69,5 @@ def extract_windows(path, window_size, step):
 
     print("number of samples : {} /  number of samples with change point : {}".format(len(windows), num_cp))
     windows = np.array(windows)
+
     return windows, np.array(lbl)

@@ -21,3 +21,4 @@ def get_negative_mask(batch_size):
         negative_mask[i, i] = 0
         negative_mask[i, i + batch_size] = 0
     return tf.constant(negative_mask)
+
