@@ -9,10 +9,10 @@ from scipy import stats
 # split a multivariate sequence into samples
 from sklearn.preprocessing import MinMaxScaler
 
-from utils.hasc_helper import load_hasc_ds
-from utils.usc_ds_helper import load_usc_ds
-from utils.wsdm_ds_helper import load_wsdm_ds
-from utils.yahoo_ds_helper import load_yahoo_ds
+from .hasc_helper import load_hasc_ds
+from .usc_ds_helper import load_usc_ds
+from .wsdm_ds_helper import load_wsdm_ds
+from .yahoo_ds_helper import load_yahoo_ds
 
 
 def ts_samples(mbatch, win):
@@ -189,7 +189,7 @@ def create_pairs(data, batch_size, n_steps_in, n_steps_out):
 
 def load_dataset(path, ds_name, win, bs, mode="train"):
     if ds_name == 'HASC':
-        trainx, trainlbl = load_hasc_ds(path, window = 2 * win, mode=mode)
+        trainx, trainlbl = load_hasc_ds(path, window=2 * win, mode=mode)
     elif ds_name == "YAHOO":
         trainx, trainlbl = load_yahoo_ds(path, window=2 * win, mode=mode)
     elif ds_name == "USC":
