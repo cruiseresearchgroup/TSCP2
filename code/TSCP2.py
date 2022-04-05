@@ -52,7 +52,7 @@ def train_prep(model, dataset, outpath, optimizer, criterion, train_name, win, t
             # a = data_augmentation(mbatch)
             # b = data_augmentation(mbatch)
 
-            loss, sim, neg = train_step(tf.expand_dims(a, axis=1), tf.expand_dims(b, axis=1), model, optimizer, criterion,
+            loss, sim, neg = train_step(tf.expand_dims(a, axis=2), tf.expand_dims(b, axis=2), model, optimizer, criterion,
                                    temperature, sfn, lfn, beta=beta_curr, tau=tau)
             step_wise_loss.append(loss)
             step_wise_sim.append(sim)

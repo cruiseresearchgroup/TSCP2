@@ -78,7 +78,7 @@ train_ds = load_dataset(DATA_PATH, DS_NAME, WIN, BATCH_SIZE, mode = "train")
 # 2 TRAINING
 # ------------------------
 
-prep_model = cp2.get_TCN_encoder((1, WIN), int(WIN / 2), CODE_SIZE)
+prep_model = cp2.get_TCN_encoder((WIN,1), int(WIN / 2), CODE_SIZE)
 
 if SIM == "cosine":
     similarity = ls._cosine_simililarity_dim2
